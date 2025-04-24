@@ -1,0 +1,90 @@
+body {
+  background: #000000;
+  color: white;
+  font-family: sans-serif;
+}
+
+
+.galaxy-orb {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: none;
+  margin: 10px;
+  background: conic-gradient(
+    from 0deg,
+    #2c2c54,
+    #341f97,
+    #5f27cd,
+    #2c2c54
+  );
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 20px #5f27cd, 0 0 40px #341f97 inset;
+  animation: spin 40s linear infinite;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.galaxy-orb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #ffffffaa, 0 0 60px #c56cf0;
+}
+
+.galaxy-orb::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 2px, transparent 2px);
+  background-size: 25px 25px;
+  animation: twinkle 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes twinkle {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(25px, 25px); }
+}
+
+
+
+
+.star-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  background: radial-gradient(circle at center, #ffffcc, #ff9900, #cc3300);
+  box-shadow: 0 0 15px 5px rgba(255, 204, 0, 0.6);
+  animation: spin3D 16s linear infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.star-orb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px 5px #ff9900;
+}
+
+@keyframes spin3D {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
