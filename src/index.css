@@ -57,28 +57,6 @@ body {
   100% { transform: translate(25px, 25px); }
 }
 
-
-
-
-.star-orb {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: none;
-  background: radial-gradient(circle at center, #ffffcc, #ff9900, #cc3300);
-  box-shadow: 0 0 15px 5px rgba(255, 204, 0, 0.6);
-  animation: spin3D 16s linear infinite;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.star-orb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px 5px #ff9900;
-}
-
 @keyframes spin3D {
   0% {
     transform: rotateY(0deg);
@@ -88,3 +66,34 @@ body {
   }
 }
 
+.star-card {
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+.back-button-container {
+  position: fixed;
+  top: 20px; /* Distance from the top of the screen */
+  left: 20px; /* Distance from the left */
+  z-index: 1000; /* Stay on top of other stuff */
+}
+
+.back-button-container button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button-container button:hover {
+  background-color: #555;
+}

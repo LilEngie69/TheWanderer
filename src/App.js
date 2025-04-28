@@ -24,14 +24,16 @@ const UniverseMap = () => {
     fetch(`https://opensheet.elk.sh/1FYk1q7Cp8hWEY0hXO83znlXzkgteNOpj-elpnj6TxzE/${encodeURIComponent(galaxyName)}`)
       .then(res => res.json())
       .then(data => {
-        const names = data.map(row => row["Star name"]).filter(name => name);
-        const starsData = names.map(name => ({
-          name,
+        const starsData = data.map(row => ({
+          name: row["Star name"],
+          color: row["Color"],        // <-- bring color from Excel
+          size: row["Size"],          // <-- bring size from Excel
+          spinSpeed: row["Rotation Speed"], // <-- bring spin speed from Excel
           planets: [
             { name: "Planet X", info: "Mystery world." },
             { name: "Planet Y", info: "Uncharted frontier." }
           ]
-        }));
+        })).filter(star => star.name);
         setStars(starsData);
       })
       .catch(err => {
@@ -39,6 +41,7 @@ const UniverseMap = () => {
         setStars([]);
       });
   };
+  
 
   const handleGalaxyClick = (galaxyName) => {
     setSelectedGalaxy(galaxyName);
@@ -69,18 +72,24 @@ const UniverseMap = () => {
 
   const handleBackToPlanets = () => {
     setSelectedPlanet(null);
-  };
+  };  
 
   return (
     <div>
       {selectedPlanet && (
-        <button onClick={handleBackToPlanets}>Back to Planets</button>
+        <div className="back-button-container">
+          <button onClick={handleBackToPlanets}>Back to Planets</button>
+        </div>
       )}
       {selectedStar && !selectedPlanet && (
-        <button onClick={handleBackToStars}>Back to Stars</button>
+        <div className="back-button-container">
+          <button onClick={handleBackToStars}>Back to Stars</button>
+        </div>
       )}
       {selectedGalaxy && !selectedStar && !selectedPlanet && (
-        <button onClick={handleBackToGalaxies}>Back to Galaxies</button>
+        <div className="back-button-container">
+          <button onClick={handleBackToGalaxies}>Back to Galaxies</button>
+        </div>
       )}
 
       {!selectedGalaxy && !selectedStar && !selectedPlanet && (
@@ -98,9 +107,14 @@ const UniverseMap = () => {
         <div>
           <h1>{selectedGalaxy} - Choose a Star</h1>
           {stars.map((star, index) => (
-            <div key={index} onClick={() => handleStarClick(star)}>
-            <StarGlobe />
-              <p>{star.name}</p>
+            <div key={index} className="star-card" onClick={() => handleStarClick(star)}>
+            <p>{star.name}</p>
+            <StarGlobe 
+            color={star.color}
+            size={star.size}
+            spinSpeed={star.spinSpeed}
+            />
+            
             </div>
           ))}
         </div>
@@ -128,6 +142,5 @@ const UniverseMap = () => {
 };
 
 
-<StarGlobe />
 
 export default UniverseMap;
